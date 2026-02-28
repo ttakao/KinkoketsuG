@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kinkoketsuG - 四位算出システム</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f0f2f5; color: #333; padding: 20px; line-height: 1.6; }
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h2 { text-align: center; color: #2c3e50; margin-bottom: 25px; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .input-group { margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
+        label { font-weight: bold; flex: 1; }
+        select { padding: 8px 12px; width: 180px; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; background-color: #fff; }
+        button { width: 100%; padding: 12px; background: #3498db; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
+        button:hover { background: #2980b9; }
+        #output { margin-top: 30px; }
+        .result-table { width: 100%; border-collapse: collapse; border-radius: 8px; overflow: hidden; }
+        .result-table th, .result-table td { border: 1px solid #ecf0f1; padding: 15px; text-align: center; }
+        .result-table th { background: #34495e; color: white; }
+        .rank-name { color: #7f8c8d; font-size: 0.9em; font-weight: normal; }
+        .value { font-size: 1.3em; font-weight: bold; color: #2c3e50; }
+        .footer { text-align: center; margin-top: 20px; font-size: 0.8em; color: #95a5a6; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>kinkoketsuG</h2>
+    
+    <div class="input-group">
+        <label>地分(D):</label>
+        <select id="diBun"></select>
+    </div>
+    <div class="input-group">
+        <label>月将(M):</label>
+        <select id="getSho"></select>
+    </div>
+    <div class="input-group">
+        <label>時支(T):</label>
+        <select id="tokiShi"></select>
+    </div>
+    <div class="input-group">
+        <label>日干(H):</label>
+        <select id="nichiKan"></select>
+    </div>
+    <div class="input-group">
+        <label>時間帯:</label>
+        <select id="isNight">
+            <option value="false">昼 (日出〜日没)</option>
+            <option value="true">夜 (日没〜日出)</option>
+        </select>
+    </div>
+
+    <button onclick="calculate()">四位を算出する</button>
+
+    <div id="output"></div>
+    <div class="footer">v1.0.0 - kinkoketsuG Engine</div>
+</div>
+
+<script src="kinkoketsuCalc.js"></script>
+
+<script>
+const zodiacs = ["", "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+const tens = ["", "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+
+// 初期セットアップ：セレクトボックスの生成
+function setup() {
+    const selects = ["diBun", "getSho", "tokiShi"];
+    selects.forEach(id => {
+        const el = document.getElementById(id);
+        for(let i=1; i<=12; i++) {
+            el.innerHTML += `<option value="${i}">${zodiacs[i]}</option>`;
+        }
+    });
+    const kanSelect = document.getElementById("nichiKan");
+    for(let i=1; i<=10; i++) {
+        kanSelect.innerHTML += `<option value="${i}">${tens[i]}</option>`;
+    }
+}
+
+// ボタンクリック時の計算処理
+function calculate() {
+    const D = document.getElementById("diBun").value;
+    const M = document.getElementById("getSho").value;
+    const T = document.getElementById("tokiShi").value;
+    const H = document.getElementById("nichiKan").value;
+    const Night = document.getElementById("isNight").value;
+
+    // 分離した外部クラスをインスタンス化
+    const calc = new kinkoketsuCalc(D, M, T, H, Night);
+    const res = calc.getResults();
+
+    document.getElementById("output").innerHTML = `
+        <table class="result-table">
+            <thead><tr><th>階層</th><th>値</th></tr></thead>
+            <tbody>
+                <tr><td class="rank-name">人元</td><td class="value">${res.jinGen}</td></tr>
+                <tr><td class="rank-name">貴神</td><td class="value">${res.kiShin}</td></tr>
+                <tr><td class="rank-name">将神</td><td class="value">${res.shoShin}</td></tr>
+                <tr><td class="rank-name">地分</td><td class="value">${res.diBun}</td></tr>
+            </tbody>
+        </table>
+    `;
+}
+
+setup();
+</script>
+
+</body>
+</html>
