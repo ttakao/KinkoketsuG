@@ -2,109 +2,100 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kinkoketsuG - 四位算出システム</title>
+    <title>kinkoketsuG - Final Edition</title>
     <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f0f2f5; color: #333; padding: 20px; line-height: 1.6; }
-        .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        h2 { text-align: center; color: #2c3e50; margin-bottom: 25px; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        .input-group { margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
-        label { font-weight: bold; flex: 1; }
-        select { padding: 8px 12px; width: 180px; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; background-color: #fff; }
-        button { width: 100%; padding: 12px; background: #3498db; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
-        button:hover { background: #2980b9; }
-        #output { margin-top: 30px; }
-        .result-table { width: 100%; border-collapse: collapse; border-radius: 8px; overflow: hidden; }
-        .result-table th, .result-table td { border: 1px solid #ecf0f1; padding: 15px; text-align: center; }
-        .result-table th { background: #34495e; color: white; }
-        .rank-name { color: #7f8c8d; font-size: 0.9em; font-weight: normal; }
-        .value { font-size: 1.3em; font-weight: bold; color: #2c3e50; }
-        .footer { text-align: center; margin-top: 20px; font-size: 0.8em; color: #95a5a6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; padding: 20px; color: #333; }
+        .container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; margin-top: 0; }
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
+        .input-group { display: flex; flex-direction: column; }
+        label { font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #555; }
+        select { padding: 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 1rem; }
+        button { width: 100%; padding: 15px; background: #2c3e50; color: white; border: none; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #34495e; transform: translateY(-2px); }
+        .result-table { width: 100%; border-collapse: collapse; margin-top: 25px; background: white; }
+        .result-table th, .result-table td { border: 1px solid #eee; padding: 12px; text-align: center; }
+        .result-table th { background: #f8f9fa; color: #666; font-size: 0.8rem; }
+        .element-badge { padding: 4px 10px; border-radius: 20px; color: white; font-weight: bold; font-size: 0.85rem; }
+        .elem-1 { background: #27ae60; } .elem-2 { background: #e74c3c; } .elem-3 { background: #f1c40f; color: #333; } .elem-4 { background: #95a5a6; } .elem-5 { background: #2980b9; }
+        .satsu-badge { color: #e67e22; font-weight: bold; font-size: 0.8rem; display: block; margin-top: 4px; }
+        
+        /* 取数パネル */
+        .lucky-panel { margin-top: 25px; background: linear-gradient(135deg, #3498db, #2c3e50); color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(52,152,219,0.3); }
+        .lucky-number { font-size: 3rem; font-weight: bold; margin: 10px 0; letter-spacing: 5px; }
+        .lucky-info { font-size: 0.9rem; opacity: 0.9; }
+
+        .judge-box { margin-top: 20px; background: #fff; border: 1px dashed #3498db; padding: 15px; border-radius: 8px; }
+        .move-tag { display: inline-block; background: #e1f5fe; color: #0288d1; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; margin-right: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>kinkoketsuG</h2>
-    
-    <div class="input-group">
-        <label>地分(D):</label>
-        <select id="diBun"></select>
+    <h2>kinkoketsuG <span style="font-size: 0.5em; vertical-align: middle; opacity: 0.6;">Final v1.4</span></h2>
+    <div class="input-grid">
+        <div class="input-group"><label>地分(D)</label><select id="diBun"></select></div>
+        <div class="input-group"><label>月将(M)</label><select id="getSho"></select></div>
+        <div class="input-group"><label>時支(T)</label><select id="tokiShi"></select></div>
+        <div class="input-group"><label>日干(H)</label><select id="nichiKan"></select></div>
+        <div class="input-group"><label>日支(S)</label><select id="nichiShi"></select></div>
+        <div class="input-group"><label>昼夜</label><select id="isNight"><option value="false">昼</option><option value="true">夜</option></select></div>
     </div>
-    <div class="input-group">
-        <label>月将(M):</label>
-        <select id="getSho"></select>
-    </div>
-    <div class="input-group">
-        <label>時支(T):</label>
-        <select id="tokiShi"></select>
-    </div>
-    <div class="input-group">
-        <label>日干(H):</label>
-        <select id="nichiKan"></select>
-    </div>
-    <div class="input-group">
-        <label>時間帯:</label>
-        <select id="isNight">
-            <option value="false">昼 (日出〜日没)</option>
-            <option value="true">夜 (日没〜日出)</option>
-        </select>
-    </div>
-
-    <button onclick="calculate()">四位を算出する</button>
-
+    <button onclick="run()">解析 & 数値抽出</button>
     <div id="output"></div>
-    <div class="footer">v1.0.0 - kinkoketsuG Engine</div>
 </div>
 
 <script src="kinkoketsuCalc.js"></script>
-
+<script src="kinkoketsuJudge.js"></script>
 <script>
 const zodiacs = ["", "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
 const tens = ["", "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
 
-// 初期セットアップ：セレクトボックスの生成
 function setup() {
-    const selects = ["diBun", "getSho", "tokiShi"];
-    selects.forEach(id => {
+    ["diBun", "getSho", "tokiShi", "nichiShi"].forEach(id => {
         const el = document.getElementById(id);
-        for(let i=1; i<=12; i++) {
-            el.innerHTML += `<option value="${i}">${zodiacs[i]}</option>`;
-        }
+        for(let i=1; i<=12; i++) el.innerHTML += `<option value="${i}">${zodiacs[i]}</option>`;
     });
     const kanSelect = document.getElementById("nichiKan");
-    for(let i=1; i<=10; i++) {
-        kanSelect.innerHTML += `<option value="${i}">${tens[i]}</option>`;
-    }
+    for(let i=1; i<=10; i++) kanSelect.innerHTML += `<option value="${i}">${tens[i]}</option>`;
 }
 
-// ボタンクリック時の計算処理
-function calculate() {
-    const D = document.getElementById("diBun").value;
-    const M = document.getElementById("getSho").value;
-    const T = document.getElementById("tokiShi").value;
-    const H = document.getElementById("nichiKan").value;
-    const Night = document.getElementById("isNight").value;
+function run() {
+    const D = document.getElementById("diBun").value, M = document.getElementById("getSho").value, T = document.getElementById("tokiShi").value;
+    const H = document.getElementById("nichiKan").value, S = document.getElementById("nichiShi").value, N = document.getElementById("isNight").value;
 
-    // 分離した外部クラスをインスタンス化
-    const calc = new kinkoketsuCalc(D, M, T, H, Night);
+    const calc = new kinkoketsuCalc(D, M, T, H, N);
     const res = calc.getResults();
+    const judge = new kinkoketsuJudge(res, M, H, S);
+    const lucky = judge.getLuckyNumbers();
+    const moves = judge.getFiveMoves();
+    const satsu = judge.getShinSatsu();
 
-    document.getElementById("output").innerHTML = `
+    let html = `
+        <div class="lucky-panel">
+            <div class="lucky-info">本命五行: ${lucky.elemName} (信頼度: ${lucky.score})</div>
+            <div class="lucky-number">${lucky.numbers}</div>
+            <div class="lucky-info">推奨される先天数</div>
+        </div>
         <table class="result-table">
-            <thead><tr><th>階層</th><th>値</th></tr></thead>
-            <tbody>
-                <tr><td class="rank-name">人元</td><td class="value">${res.jinGen}</td></tr>
-                <tr><td class="rank-name">貴神</td><td class="value">${res.kiShin}</td></tr>
-                <tr><td class="rank-name">将神</td><td class="value">${res.shoShin}</td></tr>
-                <tr><td class="rank-name">地分</td><td class="value">${res.diBun}</td></tr>
-            </tbody>
-        </table>
-    `;
+            <thead><tr><th>層</th><th>算出値</th><th>五行</th><th>旺相</th></tr></thead>
+            <tbody>`;
+    ["jinGen", "kiShin", "shoShin", "diBun"].forEach(key => {
+        const elem = judge.elements[key];
+        const s = satsu[key].map(t => `<span class="satsu-badge">! ${t}</span>`).join('');
+        html += `<tr>
+            <td style="color:#999; font-size:0.7rem;">${key.toUpperCase()}</td>
+            <td class="value">${res[key]}${s}</td>
+            <td><span class="element-badge elem-${elem}">${judge.elementNames[elem]}</span></td>
+            <td>${judge.statusNames[judge.getPower(elem)]}</td>
+        </tr>`;
+    });
+    html += `</tbody></table><div class="judge-box">`;
+    html += moves.length > 0 ? moves.map(m => `<span class="move-tag">${m.name}</span>`).join('') : "平穏な推移";
+    html += `</div>`;
+    document.getElementById("output").innerHTML = html;
 }
-
 setup();
 </script>
-
 </body>
 </html>
