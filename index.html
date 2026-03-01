@@ -2,8 +2,40 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>六壬神課金口訣G - V 0.1</title>
+    <title>六壬神課金口訣G</title>
     <style>
+        /* 右上固定リンクのスタイル */
+    .manual-nav {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .manual-nav a {
+        background: rgba(255, 255, 255, 0.8);
+        color: #2c3e50;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        border: 1px solid #3498db;
+        font-size: 0.85rem;
+        font-weight: bold;
+        transition: all 0.3s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .manual-nav a:hover {
+        background: #3498db;
+        color: white;
+        box-shadow: 0 4px 10px rgba(52,152,219,0.3);
+    }
+
+    /* モバイル対応：画面が狭い時は少し小さく */
+    @media (max-width: 480px) {
+        .manual-nav { top: 10px; right: 10px; }
+        .manual-nav a { padding: 5px 10px; font-size: 0.75rem; }
+    }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; padding: 20px; color: #333; }
         .container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         h2 { text-align: center; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; margin-top: 0; }
@@ -30,9 +62,11 @@
     </style>
 </head>
 <body>
-
+<div class="manual-nav">
+    <a href="Manual.html">📖 操作マニュアル</a>
+</div>
 <div class="container">
-    <h2>kinkoketsuG <span style="font-size: 0.5em; vertical-align: middle; opacity: 0.6;">Final v1.4</span></h2>
+    <h2>六壬神課金口訣G <span style="font-size: 0.5em; vertical-align: middle; opacity: 0.6;">Version 0.1</span></h2>
     <div class="input-grid">
         <div class="input-group"><label>地分(D)</label><select id="diBun"></select></div>
         <div class="input-group"><label>月将(M)</label><select id="getSho"></select></div>
