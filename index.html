@@ -2,85 +2,215 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>六壬神課金口訣G</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>金口訣G - 競馬解析システム</title>
     <style>
-        /* 右上固定リンクのスタイル */
-    .manual-nav {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        z-index: 1000;
-    }
+        :root {
+            --primary-bg: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --accent-blue: #3498db;
+            --accent-dark: #2c3e50;
+            --border-color: #dee2e6;
+        }
 
-    .manual-nav a {
-        background: rgba(255, 255, 255, 0.8);
-        color: #2c3e50;
-        text-decoration: none;
-        padding: 8px 15px;
-        border-radius: 20px;
-        border: 1px solid #3498db;
-        font-size: 0.85rem;
-        font-weight: bold;
-        transition: all 0.3s;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            background: var(--primary-bg); 
+            margin: 0; 
+            padding: 15px; 
+            color: var(--text-main);
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    .manual-nav a:hover {
-        background: #3498db;
-        color: white;
-        box-shadow: 0 4px 10px rgba(52,152,219,0.3);
-    }
+        /* 右上マニュアルリンク */
+        .manual-nav {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+        }
+        .manual-nav a {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--accent-blue);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-blue);
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    /* モバイル対応：画面が狭い時は少し小さく */
-    @media (max-width: 480px) {
-        .manual-nav { top: 10px; right: 10px; }
-        .manual-nav a { padding: 5px 10px; font-size: 0.75rem; }
-    }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; padding: 20px; color: #333; }
-        .container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; margin-top: 0; }
-        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
+        .container { 
+            max-width: 100%; 
+            margin: 0 auto; 
+            background: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            box-sizing: border-box;
+        }
+
+        h2 { 
+            text-align: center; 
+            font-size: 1.5rem; 
+            margin-top: 0; 
+            margin-bottom: 20px; 
+            color: var(--accent-dark);
+            border-bottom: 3px solid var(--accent-blue);
+            padding-bottom: 8px;
+        }
+
+        /* 入力グリッド：スマホでは1列、タブレット以上で2列 */
+        .input-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 12px; 
+            margin-bottom: 20px; 
+        }
+
+        @media (min-width: 480px) {
+            .input-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         .input-group { display: flex; flex-direction: column; }
-        label { font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #555; }
-        select { padding: 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 1rem; }
-        button { width: 100%; padding: 15px; background: #2c3e50; color: white; border: none; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #34495e; transform: translateY(-2px); }
-        .result-table { width: 100%; border-collapse: collapse; margin-top: 25px; background: white; }
-        .result-table th, .result-table td { border: 1px solid #eee; padding: 12px; text-align: center; }
-        .result-table th { background: #f8f9fa; color: #666; font-size: 0.8rem; }
-        .element-badge { padding: 4px 10px; border-radius: 20px; color: white; font-weight: bold; font-size: 0.85rem; }
-        .elem-1 { background: #27ae60; } .elem-2 { background: #e74c3c; } .elem-3 { background: #f1c40f; color: #333; } .elem-4 { background: #95a5a6; } .elem-5 { background: #2980b9; }
-        .satsu-badge { color: #e67e22; font-weight: bold; font-size: 0.8rem; display: block; margin-top: 4px; }
         
-        /* 取数パネル */
-        .lucky-panel { margin-top: 25px; backgroundindex.html: linear-gradient(135deg, #3498db, #2c3e50); color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(52,152,219,0.3); }
-        .lucky-number { font-size: 3rem; font-weight: bold; margin: 10px 0; letter-spacing: 5px; }
-        .lucky-info { font-size: 0.9rem; opacity: 0.9; }
+        label { 
+            font-size: 0.9rem; 
+            font-weight: bold; 
+            margin-bottom: 6px; 
+            color: #555; 
+        }
 
-        .judge-box { margin-top: 20px; background: #fff; border: 1px dashed #3498db; padding: 15px; border-radius: 8px; }
-        .move-tag { display: inline-block; background: #e1f5fe; color: #0288d1; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; margin-right: 5px; font-weight: bold; }
+        select { 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 1px solid #ccc; 
+            font-size: 1.1rem; /* スマホでズームされないサイズ */
+            background-color: #fff;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 1em;
+        }
+
+        button { 
+            width: 100%; 
+            padding: 16px; 
+            background: var(--accent-dark); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.1s;
+        }
+        button:active { transform: scale(0.98); }
+
+        /* 結果表示エリア */
+        #output { margin-top: 25px; }
+
+        .lucky-panel { 
+            margin-bottom: 20px; 
+            background: linear-gradient(135deg, #3498db, #2c3e50); 
+            color: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            text-align: center; 
+        }
+        .lucky-info { font-size: 0.9rem; opacity: 0.9; }
+        .lucky-number { font-size: 3.5rem; font-weight: bold; margin: 5px 0; letter-spacing: 4px; }
+
+        .result-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-bottom: 20px; 
+            font-size: 1rem;
+        }
+        .result-table th, .result-table td { 
+            border-bottom: 1px solid #eee; 
+            padding: 12px 8px; 
+            text-align: center; 
+        }
+        .result-table th { font-size: 0.75rem; color: #888; text-transform: uppercase; }
+
+        .value { font-size: 1.2rem; font-weight: bold; }
+        
+        .element-badge { 
+            padding: 4px 10px; 
+            border-radius: 15px; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 0.85rem; 
+            display: inline-block;
+        }
+        .elem-1 { background: #27ae60; } /* 木 */
+        .elem-2 { background: #e74c3c; } /* 火 */
+        .elem-3 { background: #f1c40f; color: #333 !important; } /* 土 */
+        .elem-4 { background: #95a5a6; } /* 金 */
+        .elem-5 { background: #2980b9; } /* 水 */
+
+        .satsu-badge { 
+            color: #e67e22; 
+            font-weight: bold; 
+            font-size: 0.8rem; 
+            display: block; 
+            margin-top: 4px;
+        }
+
+        .judge-box { 
+            background: #fff; 
+            border: 2px dashed var(--accent-blue); 
+            padding: 15px; 
+            border-radius: 12px; 
+        }
+        .move-tag { 
+            display: inline-block; 
+            background: #e1f5fe; 
+            color: #0288d1; 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            font-size: 0.9rem; 
+            margin: 4px; 
+            font-weight: bold; 
+        }
+
+        .footer { text-align: center; margin-top: 20px; font-size: 0.75rem; color: #999; }
     </style>
 </head>
 <body>
+
 <div class="manual-nav">
-    <a href="manual.html">📖 操作マニュアル</a>
+    <a href="Manual.html" target="_blank">📖 マニュアル</a>
 </div>
+
 <div class="container">
-    <h2>六壬神課金口訣G <span style="font-size: 0.5em; vertical-align: middle; opacity: 0.6;">Version 0.1</span></h2>
+    <h2>金口訣G <span style="font-size: 0.6em; opacity: 0.6;">Final v1.4</span></h2>
+    
     <div class="input-grid">
         <div class="input-group"><label>地分(D)</label><select id="diBun"></select></div>
         <div class="input-group"><label>月将(M)</label><select id="getSho"></select></div>
         <div class="input-group"><label>時支(T)</label><select id="tokiShi"></select></div>
-        <div class="input-group"><label>日干(H)</label><select id="nichiKan"></select></div>
-        <div class="input-group"><label>日支(S)</label><select id="nichiShi"></select></div>
-        <div class="input-group"><label>昼夜</label><select id="isNight"><option value="false">昼</option><option value="true">夜</option></select></div>
+        <div class="input-group"><label>当日の天干(H)</label><select id="nichiKan"></select></div>
+        <div class="input-group"><label>当日の地支(S)</label><select id="nichiShi"></select></div>
+        <div class="input-group"><label>昼夜判定</label><select id="isNight"><option value="false">昼 (日中)</option><option value="true">夜 (日没後)</option></select></div>
     </div>
+
     <button onclick="run()">解析 & 数値抽出</button>
-    <div id="output"></div>
+
+    <div id="output">
+        <p style="text-align:center; color:#999; margin-top:40px;">条件を入力して解析ボタンを押してください</p>
+    </div>
+
+    <div class="footer">© 2026 KinkoketsuG Project</div>
 </div>
 
-<script src="KinkoketsuCalc.js"></script>
-<script src="KinkoketsuJudge.js"></script>
+<script src="kinkoketsuCalc.js"></script>
+<script src="kinkoketsuJudge.js"></script>
 <script>
 const zodiacs = ["", "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
 const tens = ["", "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
@@ -112,22 +242,31 @@ function run() {
             <div class="lucky-info">推奨される先天数</div>
         </div>
         <table class="result-table">
-            <thead><tr><th>層</th><th>算出値</th><th>五行</th><th>旺相</th></tr></thead>
+            <thead><tr><th>層</th><th>値</th><th>五行</th><th>旺相</th></tr></thead>
             <tbody>`;
+    
     ["jinGen", "kiShin", "shoShin", "diBun"].forEach(key => {
         const elem = judge.elements[key];
+        const power = judge.getPower(elem);
         const s = satsu[key].map(t => `<span class="satsu-badge">! ${t}</span>`).join('');
+        const label = key === "jinGen" ? "人元" : key === "kiShin" ? "貴神" : key === "shoShin" ? "将神" : "地分";
+        
         html += `<tr>
-            <td style="color:#999; font-size:0.7rem;">${key.toUpperCase()}</td>
+            <td style="color:#888; font-size:0.8rem;">${label}</td>
             <td class="value">${res[key]}${s}</td>
             <td><span class="element-badge elem-${elem}">${judge.elementNames[elem]}</span></td>
-            <td>${judge.statusNames[judge.getPower(elem)]}</td>
+            <td style="font-weight:bold;">${judge.statusNames[power]}</td>
         </tr>`;
     });
+
     html += `</tbody></table><div class="judge-box">`;
-    html += moves.length > 0 ? moves.map(m => `<span class="move-tag">${m.name}</span>`).join('') : "平穏な推移";
+    html += moves.length > 0 ? moves.map(m => `<span class="move-tag">${m.name}</span>`).join('') : '<span style="color:#999">特筆すべき動きなし</span>';
     html += `</div>`;
+    
     document.getElementById("output").innerHTML = html;
+
+    // 解析後に結果部分へスムーズにスクロール
+    document.getElementById("output").scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 setup();
 </script>
