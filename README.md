@@ -6,12 +6,14 @@
 2026年上半期のAIでここまでできるという研究の一端でもあります。
 
 構成は極めてシンプルで、
-index.html, manual.html
-kinkoketsuCalc.js
-kinkoketsuJudge.js
-
+index.html, manual.html, kinkoketsuCalc.js, kinkoketsuJudge.js
 の4ファイルのみです。
 なお、マニュアルは競馬での使い方に特化しています。
+
+https://ttakao.github.io/KinkoketsuG/
+
+で実働を見ることができます。
+
 クラスライブラリーの詳細は以下に記載してあります。
 
 ## kinkoketsuCalc クラス定義仕様書
